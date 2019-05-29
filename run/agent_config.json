@@ -1,0 +1,473 @@
+{
+  "config": {
+    "session": {
+      "maxAge": 86400000,
+      "key": "EGG_SESS",
+      "httpOnly": true,
+      "encrypt": true
+    },
+    "jsonp": {
+      "limit": 50,
+      "callback": [
+        "_callback",
+        "callback"
+      ],
+      "csrf": false
+    },
+    "onerror": {
+      "errorPageUrl": "",
+      "appErrorFilter": null,
+      "templatePath": "D:\\zlb\\my_face_server\\node_modules\\egg-onerror\\lib\\onerror_page.mustache"
+    },
+    "i18n": {
+      "defaultLocale": "en_US",
+      "dirs": [],
+      "queryField": "locale",
+      "cookieField": "locale",
+      "cookieMaxAge": "1y"
+    },
+    "watcher": {
+      "type": "development",
+      "eventSources": {
+        "default": "D:\\zlb\\my_face_server\\node_modules\\egg-watcher\\lib\\event-sources\\default",
+        "development": "D:\\zlb\\my_face_server\\node_modules\\egg-watcher\\lib\\event-sources\\development"
+      }
+    },
+    "customLogger": {
+      "scheduleLogger": {
+        "consoleLevel": "NONE",
+        "file": "egg-schedule.log"
+      }
+    },
+    "schedule": {
+      "directory": []
+    },
+    "multipart": {
+      "mode": "file",
+      "autoFields": false,
+      "defaultCharset": "utf8",
+      "fieldNameSize": 100,
+      "fieldSize": "100kb",
+      "fields": 10,
+      "fileSize": "50mb",
+      "files": 10,
+      "fileExtensions": [
+        ".xlsx"
+      ],
+      "whitelist": null,
+      "tmpdir": "C:\\Users\\ADMINI\\x7e1\\AppData\\Local\\Temp\\egg-multipart-tmp\\faceServer",
+      "cleanSchedule": {
+        "cron": "0 30 4 * * *"
+      }
+    },
+    "development": {
+      "watchDirs": [],
+      "ignoreDirs": [],
+      "fastReady": false,
+      "reloadOnDebug": true,
+      "overrideDefault": false
+    },
+    "logrotator": {
+      "filesRotateByHour": null,
+      "hourDelimiter": "-",
+      "filesRotateBySize": null,
+      "maxFileSize": 52428800,
+      "maxFiles": 10,
+      "rotateDuration": 60000,
+      "maxDays": 31
+    },
+    "static": {
+      "prefix": "/public/",
+      "dir": "D:\\zlb\\my_face_server\\app\\public",
+      "dynamic": true,
+      "preload": false,
+      "buffer": false,
+      "maxFiles": 1000
+    },
+    "view": {
+      "root": "D:\\zlb\\my_face_server\\app\\view",
+      "cache": false,
+      "defaultExtension": ".html",
+      "defaultViewEngine": "",
+      "mapping": {}
+    },
+    "sequelize": {
+      "dialect": "mysql",
+      "database": "scm_main",
+      "host": "127.0.0.1",
+      "port": 3306,
+      "username": "root",
+      "password": "<String len: 0>",
+      "logging": false
+    },
+    "cors": {
+      "origin": "*",
+      "allowMethods": "GET,HEAD,PUT,POST,DELETE,PATCH"
+    },
+    "env": "local",
+    "name": "faceServer",
+    "keys": "<String len: 29>",
+    "proxy": false,
+    "protocolHeaders": "x-forwarded-proto",
+    "ipHeaders": "x-forwarded-for",
+    "hostHeaders": "",
+    "pkg": {
+      "name": "faceServer",
+      "version": "1.0.0",
+      "description": "人脸柱服务",
+      "main": "index.js",
+      "private": true,
+      "dependencies": {
+        "build": "^0.1.4",
+        "egg": "^2.2.1",
+        "egg-alinode": "^2.0.1",
+        "egg-cors": "^2.1.1",
+        "egg-emqtt": "^1.0.0",
+        "egg-mssql": "^1.0.2",
+        "egg-redis": "^2.3.1",
+        "egg-schedule": "^3.6.1",
+        "egg-scripts": "^2.11.0",
+        "egg-sequelize": "^4.1.0",
+        "lint": "^1.1.2",
+        "moment": "^2.24.0",
+        "mqtt": "^2.18.8",
+        "mysql2": "^1.6.1",
+        "node-uuid": "^1.npm4.8",
+        "tedious": "^2.6.4",
+        "tslint": "^5.16.0"
+      },
+      "devDependencies": {
+        "autod": "^3.0.1",
+        "autod-egg": "^1.0.0",
+        "egg-bin": "^4.3.5",
+        "egg-ci": "^1.8.0",
+        "egg-mock": "^3.14.0",
+        "eslint": "4",
+        "eslint-config-egg": "7",
+        "sequelize-cli": "^5.4.0",
+        "webstorm-disable-index": "^1.2.0"
+      },
+      "engines": {
+        "node": ">=8.9.0"
+      },
+      "scripts": {
+        "start": "egg-scripts start --title=laiji",
+        "stop": "egg-scripts stop --title=laiji",
+        "dev": "egg-bin dev",
+        "build": "node build/build.js",
+        "debug": "egg-bin debug",
+        "test": "npm run lint -- --fix && npm run test-local",
+        "test-local": "egg-bin test",
+        "cov": "egg-bin cov",
+        "lint": "eslint .",
+        "ci": "npm run lint && npm run cov",
+        "autod": "autod"
+      },
+      "ci": {
+        "version": "8"
+      },
+      "repository": {
+        "type": "git",
+        "url": ""
+      },
+      "showcase": {
+        "egg": {
+          "typescript": true
+        }
+      },
+      "author": "zlb",
+      "license": "MIT"
+    },
+    "baseDir": "D:\\zlb\\my_face_server",
+    "HOME": "C:\\Users\\Administrator",
+    "rundir": "D:\\zlb\\my_face_server\\run",
+    "dump": {
+      "ignore": "<Set>"
+    },
+    "confusedConfigurations": {
+      "bodyparser": "bodyParser",
+      "notFound": "notfound",
+      "sitefile": "siteFile",
+      "middlewares": "middleware",
+      "httpClient": "httpclient"
+    },
+    "notfound": {
+      "pageUrl": ""
+    },
+    "siteFile": {
+      "/favicon.ico": "<Buffer len: 6463>"
+    },
+    "bodyParser": {
+      "enable": true,
+      "encoding": "utf8",
+      "formLimit": "10mb",
+      "jsonLimit": "10mb",
+      "strict": true,
+      "queryString": {
+        "arrayLimit": 100,
+        "depth": 5,
+        "parameterLimit": 1000
+      }
+    },
+    "logger": {
+      "dir": "D:\\zlb\\my_face_server\\logs\\faceServer",
+      "encoding": "utf8",
+      "env": "local",
+      "level": "INFO",
+      "consoleLevel": "INFO",
+      "disableConsoleAfterReady": false,
+      "outputJSON": false,
+      "buffer": true,
+      "appLogName": "faceServer-web.log",
+      "coreLogName": "egg-web.log",
+      "agentLogName": "egg-agent.log",
+      "errorLogName": "common-error.log",
+      "coreLogger": {
+        "consoleLevel": "WARN"
+      },
+      "allowDebugAtProd": false,
+      "type": "agent"
+    },
+    "httpclient": {
+      "enableDNSCache": false,
+      "dnsCacheLookupInterval": 10000,
+      "dnsCacheMaxLength": 1000,
+      "request": {
+        "timeout": 5000
+      },
+      "httpAgent": {
+        "keepAlive": true,
+        "freeSocketKeepAliveTimeout": 4000,
+        "maxSockets": 9007199254740991,
+        "maxFreeSockets": 256
+      },
+      "httpsAgent": {
+        "keepAlive": true,
+        "freeSocketKeepAliveTimeout": 4000,
+        "maxSockets": 9007199254740991,
+        "maxFreeSockets": 256
+      }
+    },
+    "meta": {
+      "enable": true,
+      "logging": false
+    },
+    "coreMiddleware": [
+      "meta",
+      "siteFile",
+      "notfound",
+      "bodyParser",
+      "overrideMethod"
+    ],
+    "workerStartTimeout": 600000,
+    "cluster": {
+      "listen": {
+        "path": "",
+        "port": 7001,
+        "hostname": ""
+      }
+    },
+    "clusterClient": {
+      "maxWaitTime": 60000,
+      "responseTimeout": 60000
+    },
+    "onClientError": null,
+    "middleware": [],
+    "emqtt": {
+      "client": {
+        "host": "mqtt://127.0.0.1",
+        "password": "<String len: 5>",
+        "username": "guest",
+        "clientId": "egg_zlb",
+        "options": {
+          "clean": false,
+          "keepalive": 60,
+          "protocolId": "MQTT",
+          "protocolVersion": 4,
+          "reconnectPeriod": 1000,
+          "connectTimeout": 30000
+        },
+        "msgMiddleware": [
+          "msg2json"
+        ]
+      }
+    },
+    "project": {
+      "server": "http://10.1.0.6:53059/",
+      "system": "d://aa//",
+      "maxConCurrentPerDev": 10,
+      "position": 17800
+    },
+    "coreMiddlewares": "~config~coreMiddleware",
+    "appMiddlewares": "~config~middleware",
+    "appMiddleware": "~config~middleware"
+  },
+  "plugins": {
+    "session": {
+      "enable": true,
+      "package": "egg-session",
+      "name": "session",
+      "dependencies": [],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "D:\\zlb\\my_face_server\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-session",
+      "version": "3.1.0"
+    },
+    "jsonp": {
+      "enable": true,
+      "package": "egg-jsonp",
+      "name": "jsonp",
+      "dependencies": [],
+      "optionalDependencies": [
+        "security"
+      ],
+      "env": [],
+      "from": "D:\\zlb\\my_face_server\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-jsonp",
+      "version": "2.0.0"
+    },
+    "onerror": {
+      "enable": true,
+      "package": "egg-onerror",
+      "name": "onerror",
+      "dependencies": [],
+      "optionalDependencies": [
+        "jsonp"
+      ],
+      "env": [],
+      "from": "D:\\zlb\\my_face_server\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-onerror",
+      "version": "2.1.0"
+    },
+    "i18n": {
+      "enable": true,
+      "package": "egg-i18n",
+      "name": "i18n",
+      "dependencies": [],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "D:\\zlb\\my_face_server\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-i18n",
+      "version": "2.0.0"
+    },
+    "watcher": {
+      "enable": true,
+      "package": "egg-watcher",
+      "name": "watcher",
+      "dependencies": [],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "D:\\zlb\\my_face_server\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-watcher",
+      "version": "3.1.0"
+    },
+    "schedule": {
+      "enable": true,
+      "package": "egg-schedule",
+      "name": "schedule",
+      "dependencies": [],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "D:\\zlb\\my_face_server\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-schedule",
+      "version": "3.6.1"
+    },
+    "multipart": {
+      "enable": true,
+      "package": "egg-multipart",
+      "name": "multipart",
+      "dependencies": [],
+      "optionalDependencies": [
+        "schedule"
+      ],
+      "env": [],
+      "from": "D:\\zlb\\my_face_server\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-multipart",
+      "version": "2.2.1"
+    },
+    "development": {
+      "enable": true,
+      "package": "egg-development",
+      "name": "development",
+      "dependencies": [
+        "watcher"
+      ],
+      "optionalDependencies": [],
+      "env": [
+        "local"
+      ],
+      "from": "D:\\zlb\\my_face_server\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-development",
+      "version": "2.4.1"
+    },
+    "logrotator": {
+      "enable": true,
+      "package": "egg-logrotator",
+      "name": "logrotator",
+      "dependencies": [
+        "schedule"
+      ],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "D:\\zlb\\my_face_server\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-logrotator",
+      "version": "3.0.3"
+    },
+    "static": {
+      "enable": true,
+      "package": "egg-static",
+      "name": "static",
+      "dependencies": [],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "D:\\zlb\\my_face_server\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-static",
+      "version": "2.1.1"
+    },
+    "view": {
+      "enable": true,
+      "package": "egg-view",
+      "name": "view",
+      "dependencies": [],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "D:\\zlb\\my_face_server\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-view",
+      "version": "2.1.0"
+    },
+    "sequelize": {
+      "enable": true,
+      "package": "egg-sequelize",
+      "name": "sequelize",
+      "dependencies": [],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "D:\\zlb\\my_face_server\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-sequelize",
+      "version": "4.1.0"
+    },
+    "emqtt": {
+      "enable": true,
+      "package": "egg-emqtt",
+      "name": "emqtt",
+      "dependencies": [],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "D:\\zlb\\my_face_server\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-emqtt",
+      "version": "1.0.0"
+    },
+    "cors": {
+      "enable": true,
+      "package": "egg-cors",
+      "name": "cors",
+      "dependencies": [],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "D:\\zlb\\my_face_server\\config\\plugin.js",
+      "path": "D:\\zlb\\my_face_server\\node_modules\\egg-cors",
+      "version": "2.1.1"
+    }
+  }
+}

@@ -1,0 +1,298 @@
+[
+  {
+    "name": "Application Start",
+    "start": 1558577769217,
+    "end": 1558577771453,
+    "duration": 2236,
+    "pid": 13884,
+    "index": 0
+  },
+  {
+    "name": "Load Plugin",
+    "start": 1558577769222,
+    "end": 1558577769322,
+    "duration": 100,
+    "pid": 13884,
+    "index": 1
+  },
+  {
+    "name": "Load Config",
+    "start": 1558577769322,
+    "end": 1558577769359,
+    "duration": 37,
+    "pid": 13884,
+    "index": 2
+  },
+  {
+    "name": "Require(0) config/config.default.js",
+    "start": 1558577769323,
+    "end": 1558577769325,
+    "duration": 2,
+    "pid": 13884,
+    "index": 3
+  },
+  {
+    "name": "Require(1) node_modules/egg-session/config/config.default.js",
+    "start": 1558577769327,
+    "end": 1558577769328,
+    "duration": 1,
+    "pid": 13884,
+    "index": 4
+  },
+  {
+    "name": "Require(2) node_modules/egg-jsonp/config/config.default.js",
+    "start": 1558577769329,
+    "end": 1558577769330,
+    "duration": 1,
+    "pid": 13884,
+    "index": 5
+  },
+  {
+    "name": "Require(3) node_modules/egg-onerror/config/config.default.js",
+    "start": 1558577769331,
+    "end": 1558577769331,
+    "duration": 0,
+    "pid": 13884,
+    "index": 6
+  },
+  {
+    "name": "Require(4) node_modules/egg-i18n/config/config.default.js",
+    "start": 1558577769332,
+    "end": 1558577769332,
+    "duration": 0,
+    "pid": 13884,
+    "index": 7
+  },
+  {
+    "name": "Require(5) node_modules/egg-watcher/config/config.default.js",
+    "start": 1558577769333,
+    "end": 1558577769333,
+    "duration": 0,
+    "pid": 13884,
+    "index": 8
+  },
+  {
+    "name": "Require(6) node_modules/egg-schedule/config/config.default.js",
+    "start": 1558577769334,
+    "end": 1558577769334,
+    "duration": 0,
+    "pid": 13884,
+    "index": 9
+  },
+  {
+    "name": "Require(7) node_modules/egg-multipart/config/config.default.js",
+    "start": 1558577769335,
+    "end": 1558577769336,
+    "duration": 1,
+    "pid": 13884,
+    "index": 10
+  },
+  {
+    "name": "Require(8) node_modules/egg-development/config/config.default.js",
+    "start": 1558577769337,
+    "end": 1558577769338,
+    "duration": 1,
+    "pid": 13884,
+    "index": 11
+  },
+  {
+    "name": "Require(9) node_modules/egg-logrotator/config/config.default.js",
+    "start": 1558577769338,
+    "end": 1558577769343,
+    "duration": 5,
+    "pid": 13884,
+    "index": 12
+  },
+  {
+    "name": "Require(10) node_modules/egg-static/config/config.default.js",
+    "start": 1558577769344,
+    "end": 1558577769345,
+    "duration": 1,
+    "pid": 13884,
+    "index": 13
+  },
+  {
+    "name": "Require(11) node_modules/egg-view/config/config.default.js",
+    "start": 1558577769346,
+    "end": 1558577769347,
+    "duration": 1,
+    "pid": 13884,
+    "index": 14
+  },
+  {
+    "name": "Require(12) node_modules/egg-sequelize/config/config.default.js",
+    "start": 1558577769349,
+    "end": 1558577769350,
+    "duration": 1,
+    "pid": 13884,
+    "index": 15
+  },
+  {
+    "name": "Require(13) node_modules/egg-cors/config/config.default.js",
+    "start": 1558577769351,
+    "end": 1558577769351,
+    "duration": 0,
+    "pid": 13884,
+    "index": 16
+  },
+  {
+    "name": "Require(14) node_modules/egg/config/config.default.js",
+    "start": 1558577769352,
+    "end": 1558577769353,
+    "duration": 1,
+    "pid": 13884,
+    "index": 17
+  },
+  {
+    "name": "Require(15) config/config.default.js",
+    "start": 1558577769355,
+    "end": 1558577769355,
+    "duration": 0,
+    "pid": 13884,
+    "index": 18
+  },
+  {
+    "name": "Require(16) node_modules/egg-watcher/config/config.local.js",
+    "start": 1558577769356,
+    "end": 1558577769357,
+    "duration": 1,
+    "pid": 13884,
+    "index": 19
+  },
+  {
+    "name": "Require(17) node_modules/egg-view/config/config.local.js",
+    "start": 1558577769358,
+    "end": 1558577769358,
+    "duration": 0,
+    "pid": 13884,
+    "index": 20
+  },
+  {
+    "name": "Require(18) node_modules/egg/config/config.local.js",
+    "start": 1558577769359,
+    "end": 1558577769359,
+    "duration": 0,
+    "pid": 13884,
+    "index": 21
+  },
+  {
+    "name": "Load extend/agent.js",
+    "start": 1558577769375,
+    "end": 1558577769471,
+    "duration": 96,
+    "pid": 13884,
+    "index": 22
+  },
+  {
+    "name": "Require(19) node_modules/egg-schedule/app/extend/agent.js",
+    "start": 1558577769376,
+    "end": 1558577769456,
+    "duration": 80,
+    "pid": 13884,
+    "index": 23
+  },
+  {
+    "name": "Require(20) node_modules/egg-logrotator/app/extend/agent.js",
+    "start": 1558577769457,
+    "end": 1558577769468,
+    "duration": 11,
+    "pid": 13884,
+    "index": 24
+  },
+  {
+    "name": "Load agent.js",
+    "start": 1558577769472,
+    "end": 1558577769499,
+    "duration": 27,
+    "pid": 13884,
+    "index": 25
+  },
+  {
+    "name": "Require(21) node_modules/egg-onerror/agent.js",
+    "start": 1558577769473,
+    "end": 1558577769473,
+    "duration": 0,
+    "pid": 13884,
+    "index": 26
+  },
+  {
+    "name": "Require(22) node_modules/egg-watcher/agent.js",
+    "start": 1558577769474,
+    "end": 1558577769479,
+    "duration": 5,
+    "pid": 13884,
+    "index": 27
+  },
+  {
+    "name": "Require(23) node_modules/egg-schedule/agent.js",
+    "start": 1558577769480,
+    "end": 1558577769482,
+    "duration": 2,
+    "pid": 13884,
+    "index": 28
+  },
+  {
+    "name": "Require(24) node_modules/egg-development/agent.js",
+    "start": 1558577769483,
+    "end": 1558577769493,
+    "duration": 10,
+    "pid": 13884,
+    "index": 29
+  },
+  {
+    "name": "Require(25) node_modules/egg-logrotator/agent.js",
+    "start": 1558577769493,
+    "end": 1558577769494,
+    "duration": 1,
+    "pid": 13884,
+    "index": 30
+  },
+  {
+    "name": "Require(26) node_modules/egg-sequelize/agent.js",
+    "start": 1558577769498,
+    "end": 1558577769498,
+    "duration": 0,
+    "pid": 13884,
+    "index": 31
+  },
+  {
+    "name": "Before Start in node_modules/egg-watcher/lib/init.js:15:14",
+    "start": 1558577769504,
+    "end": 1558577771165,
+    "duration": 1661,
+    "pid": 13884,
+    "index": 32
+  },
+  {
+    "name": "Before Start in node_modules/egg-schedule/agent.js:12:9",
+    "start": 1558577769506,
+    "end": 1558577771135,
+    "duration": 1629,
+    "pid": 13884,
+    "index": 33
+  },
+  {
+    "name": "Before Start in node_modules/egg-development/agent.js:36:9",
+    "start": 1558577769507,
+    "end": 1558577771357,
+    "duration": 1850,
+    "pid": 13884,
+    "index": 34
+  },
+  {
+    "name": "Load \"Symbol(model)\" to Application",
+    "start": 1558577770867,
+    "end": 1558577770974,
+    "duration": 107,
+    "pid": 13884,
+    "index": 35
+  },
+  {
+    "name": "Before Start in node_modules/egg-sequelize/lib/loader.js:39:7",
+    "start": 1558577770974,
+    "end": 1558577771452,
+    "duration": 478,
+    "pid": 13884,
+    "index": 36
+  }
+]

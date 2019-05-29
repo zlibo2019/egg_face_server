@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    /*box-sizing: border-box;*/
+    /* -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; */
+    font-family: 微软雅黑;
+}
+html, body {
+    width: 100%;
+    height: auto;
+}
+body {overflow-x: hidden;}
+input,textarea {
+    -webkit-user-select: text!important;
+    -moz-user-select: text!important;
+    -ms-user-select: text!important;
+    user-select: text!important;
+}
+
+input[type="text"],input[type="button"], input[type="submit"],input[type="tel"],input[type="email"] ,input[type="file"],input[type="reset"],input[type="date"],input[type="time"],input[type="number"] {
+    -webkit-appearance: none; border-radius:5px;}
+div,dl,dt,dd,span,ul,li,ol,a,input,font,b:hover{ -webkit-tap-highlight-color:rgba(0,0,0,0);}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+input[type="number"]{-moz-appearance:textfield;}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #B7B7B7;
+    font-size: 12px;
+}
+input:-moz-placeholder, textarea:-moz-placeholder {
+    color: #B7B7B7;
+    font-size: 12px;
+}
+input::-moz-placeholder, textarea::-moz-placeholder {
+    color: #B7B7B7;
+    font-size: 12px;
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color: #B7B7B7;
+    font-size: 12px;
+}
+a{
+    text-decoration: none;
+}
+#app {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #333;
+    margin-top: 0px;
+    width: 100%;
+    height: auto;
+}

@@ -1,0 +1,67 @@
+{
+  "name": "faceServer",
+  "version": "1.0.0",
+  "description": "人脸柱服务",
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "build": "^0.1.4",
+    "egg": "^2.2.1",
+    "egg-alinode": "^2.0.1",
+    "egg-cors": "^2.1.1",
+    "egg-emqtt": "^1.0.0",
+    "egg-mssql": "^1.0.2",
+    "egg-redis": "^2.3.1",
+    "egg-schedule": "^3.6.1",
+    "egg-scripts": "^2.11.0",
+    "egg-sequelize": "^4.1.0",
+    "lint": "^1.1.2",
+    "moment": "^2.24.0",
+    "mqtt": "^2.18.8",
+    "mysql2": "^1.6.1",
+    "node-uuid": "^1.npm4.8",
+    "tedious": "^2.6.4",
+    "tslint": "^5.16.0"
+  },
+  "devDependencies": {
+    "autod": "^3.0.1",
+    "autod-egg": "^1.0.0",
+    "egg-bin": "^4.3.5",
+    "egg-ci": "^1.8.0",
+    "egg-mock": "^3.14.0",
+    "eslint": "4",
+    "eslint-config-egg": "7",
+    "sequelize-cli": "^5.4.0",
+    "webstorm-disable-index": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "scripts": {
+    "start": "egg-scripts start --title=laiji",
+    "stop": "egg-scripts stop --title=laiji",
+    "dev": "egg-bin dev",
+    "build": "node build/build.js",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
+  },
+  "ci": {
+    "version": "8"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "showcase": {
+    "egg": {
+      "typescript": true
+    }
+  },
+  "author": "zlb",
+  "license": "MIT"
+}
