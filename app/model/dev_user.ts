@@ -3,32 +3,27 @@
 module.exports = app => {
   const {
     STRING,
-    INTEGER,
-    DATE
+    INTEGER
   } = app.Sequelize;
-  const dt_user = app.model.define('dt_user', {   
+  const dev_user = app.model.define('dev_user', {
     id: {
       type: INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: false
+      autoIncrement: true,
     },
-    user_no: {
+    dev_id: {
       type: STRING,
       allowNull: true
     },
-    user_name: {
+    user_id: {
       type: STRING,
       allowNull: true
-    },
-    user_sex: {
-      type: INTEGER,
-      allowNull: true
-    },
+    }
   }, {
-      tableName: 'dt_user',
+      tableName: 'dev_user',
       freezeTableName: true, // Model 对应的表名将与model名相同
       timestamps: false,//去除createAt updateAt
     });
-  return dt_user;
+  return dev_user;
 };

@@ -3,56 +3,55 @@
 module.exports = app => {
   const {
     STRING,
-    INTEGER,
-    DATE,
+    INTEGER
   } = app.Sequelize;
-  const jreal_update_1 = app.model.define('jreal_update_1', {   
-    jsig: {
+  const dt_user = app.model.define('dt_user', {   
+    id: {
       type: INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    jdodata: {
+    user_no: {
+      type: STRING,
+      allowNull: true
+    },
+    user_id: {
+      type: STRING,
+      allowNull: true
+    },
+    user_name: {
+      type: STRING,
+      allowNull: true
+    },
+    user_sex: {
       type: INTEGER,
       allowNull: true
     },
-    juser_id: {
-      type:INTEGER,
+    user_card: {
+      type: STRING,
       allowNull: true
     },
-    jdata_str: {
-      type:STRING,
+    user_birthday: {
+      type: STRING,
       allowNull: true
     },
-    jdev_id: {
-      type:INTEGER,
+    user_depart: {
+      type: STRING,
       allowNull: true
     },
-    jdev_bh: {
-      type:STRING,
+    user_nation: {
+      type: STRING,
       allowNull: true
     },
-    jext_type: {
-      type:INTEGER,
-      allowNull: true
-    },
-    jtime: {
-      type:DATE,
-      allowNull: true
-    },
-    joperator: {
-      type:STRING,
-      allowNull: true
-    },
-    jip_addr: {
-      type:STRING,
+    user_address: {
+      type: STRING,
       allowNull: true
     },
   }, {
-      tableName: 'jreal_update_1',
+      tableName: 'dt_user',
       freezeTableName: true, // Model 对应的表名将与model名相同
       timestamps: false,//去除createAt updateAt
     });
-  return jreal_update_1;
+  return dt_user;
 };
