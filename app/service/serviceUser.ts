@@ -1,6 +1,6 @@
 import { Service } from 'egg';
 import { IResult } from '../extend/helper';
-const moment = require('moment');
+// const moment = require('moment');
 const fs = require("fs");
 const path = require('path');
 
@@ -10,12 +10,117 @@ export default class UserService extends Service {
   /**
    * # 读照片文件返回base64
    */
-  readPhotofile(photoPath) {
+  async readPhotofile(photoPath) {
+
     let base64 = '';
-    let data = fs.readFileSync(photoPath);
-    base64 = data.toString("base64");
+    // 保存照片
+    await new Promise((resolve, reject) => {
+      // @ts-check
+      fs.readFile(photoPath, function (err, data) {
+        if (err) {
+          reject(err);
+          console.log(err);
+        }
+        else {
+
+          base64 = data.toString("base64");
+          // console.log('success:' + base64);
+          resolve();
+        }
+      });
+    })
     return base64;
   }
+
+
+  /**
+  * # 上传记录
+  */
+  async postRecord(dev_id, outInt, id, date, photoPath) {
+
+    const { ctx, app } = this;
+    let jResult: IResult
+      = {
+      code: "00000000",
+      message: '',
+      result: null
+    };
+    try {
+      // console.log('sssssssssssss' + JSON.stringify(record));
+      // let arrField = record.inStr.split(",");
+      // let photoName = arrField[6];
+      // let dev_id = arrField[7];
+      // let outInt = Number(arrField[3]) - 1;
+      // let id = Number(arrField[0]);
+      let res = await this.getUserIdById(id);
+      let pin = '0';
+      if ('00000001' !== res.code) {
+        pin = res.result[0].user_id;
+      }
+      // let sDate = moment().format("YYYY-MM-DD")
+      // let root = path.resolve(__dirname, '..');
+      // root = path.resolve(root, '..');
+      // let photoPath = `${root}\\record_photo\\${dev_id}\\${date}\\${photoName}.jpg`;
+
+      // let photoPath = `c:/record_photo/${dev_id}/${sDate}/${photoName}.jpg`;
+      let base64 = '';
+
+      console.log('photo path:' + photoPath);
+      base64 = await this.readPhotofile(photoPath);
+      if ('' === base64) {
+        jResult.code = "00000001";
+        jResult.message = 'get photo fail' + photoPath;
+        return jResult;
+      }
+
+      let log = {
+        date: date, //arrField[1],
+        verify_type: 4096,
+        pin: pin,
+        io_flag: outInt,
+        picture: base64,
+        status: 0
+      }
+      let postData = {};
+      // @ts-ignore
+      postData.sn = dev_id;
+      // @ts-ignore
+      postData.sid = `device.data.upload.checklog`;
+      let params = {};
+      // @ts-ignore
+      params.logs = [log];
+      let payload = {};
+      // @ts-ignore
+      payload.params = params;
+      // @ts-ignore
+      postData.payload = payload;
+
+      // console.log('post data:' + JSON.stringify(postData));
+
+      // 获取班级信息
+      res = await ctx.curl(`${app.config.info.connectIp}/admin/identityAuth/postPeopleInfo`, {
+        method: 'POST',
+        contentType: 'json',
+        data: postData,
+        dataType: 'json',
+      });
+
+      // @ts-ignore
+      if (undefined === res.data || res.data.code === '00000001') {
+        jResult.code = '00000001';
+        jResult.message = `提交记录错误：${res.message}`;
+        jResult.result = null;
+        return jResult;
+      }
+      return jResult;
+    } catch (err) {
+      jResult.code = '00000001';
+      jResult.message = `${err.stack}`;
+      jResult.result = null;
+      return jResult;
+    }
+  }
+
 
   // function readPhotofile(photoPath) {
   //     setTimeout(() => {
@@ -85,97 +190,19 @@ export default class UserService extends Service {
   /**
    * # 解析路径取设备id
    */
-  getDevIdFromPath(photoPath) {
+  getDevInforFromPath(photoPath) {
     let arrDir = photoPath.split("\\");
     let len = arrDir.length;
-    let devId = arrDir[len - 3];
-    return devId;
+    let res = {};
+    // @ts-ignore
+    res.devId = arrDir[len - 3];
+    // @ts-ignore
+    res.day = arrDir[len - 2];
+    // @ts-ignore
+    res.photoName = arrDir[len - 1];
+    return res;
   }
 
-  /**
-   * # 上传记录
-   */
-  async postRecord(record) {
-
-    const { ctx, app } = this;
-    let jResult: IResult
-      = {
-      code: "00000000",
-      message: '',
-      result: null
-    };
-    try {
-      let outInt = record.outInt;
-      let arrField = record.inStr.split(",");
-      let photoName = arrField[6];
-      let dev_id = arrField[7];
-      let id = Number(arrField[0]);
-      let res = await this.getUserIdById(id);
-      let pin = '0';
-      if ('00000001' !== res.code) {
-        pin = res.result[0].user_id;
-      }
-      let date = moment().format("YYYY-MM-DD")
-      let root = path.resolve(__dirname, '..');
-      root = path.resolve(root, '..');
-      let photoPath = `${root}\\record_photo\\${dev_id}\\${date}\\${photoName}.jpg`;
-
-
-      let base64 = '';
-      base64 = this.readPhotofile(photoPath);
-      if ('' === base64) {
-        jResult.code = "00000001";
-        jResult.message = 'get photo fail';
-        return jResult;
-      }
-
-      let log = {
-        date: arrField[1],
-        verify_type: 4096,
-        pin: pin,
-        io_flag: outInt,
-        picture: base64,
-        status: 0
-      }
-      let postData = {};
-      // @ts-ignore
-      postData.sn = dev_id;
-      // @ts-ignore
-      postData.sid = `device.data.upload.checklog`;
-      let params = {};
-      // @ts-ignore
-      params.logs = [log];
-      let payload = {};
-      // @ts-ignore
-      payload.params = params;
-      // @ts-ignore
-      postData.payload = payload;
-
-      // console.log('post data:' + JSON.stringify(postData));
-
-      // 获取班级信息
-      res = await ctx.curl(`${app.config.info.connectIp}/admin/identityAuth/postPeopleInfo`, {
-        method: 'POST',
-        contentType: 'json',
-        data: postData,
-        dataType: 'json',
-      });
-
-      // @ts-ignore
-      if (undefined === res.data || res.data.code === '00000001') {
-        jResult.code = '00000001';
-        jResult.message = `提交记录错误：${res.message}`;
-        jResult.result = null;
-        return jResult;
-      }
-      return jResult;
-    } catch (err) {
-      jResult.code = '00000001';
-      jResult.message = `${err.stack}`;
-      jResult.result = null;
-      return jResult;
-    }
-  }
 
 
 
@@ -200,7 +227,7 @@ export default class UserService extends Service {
 
       // 更新人员
 
-      console.log('人员数目：' + arrUser.length.toString());
+      // console.log('人员数目：' + arrUser.length.toString());
 
       for (let i = 0; i < arrUser.length; i++) {
         let userId = arrUser[i].identity_number;
@@ -279,7 +306,7 @@ export default class UserService extends Service {
       for (let i = 0; i < arrDev.length; i++) {
         let curDev = arrDev[i];
         for (let j = 0; j < arrUser.length; j++) {
-          console.log('人员:'+JSON.stringify(arrUser[j]));
+          // console.log('人员:' + JSON.stringify(arrUser[j]));
           let userId = arrUser[j].identity_number;
           // @ts-ignore
           let devUser = await ctx.model.DevUser.findOne({
@@ -347,6 +374,10 @@ export default class UserService extends Service {
 
     let devId = body.payload.params.sns;
     let arrUserId = body.payload.params.pins;
+
+
+    console.log('删除设备人员:' + JSON.stringify(arrUserId));
+
     try {
 
       // 下发增量

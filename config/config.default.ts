@@ -112,7 +112,7 @@ export default (appInfo: EggAppInfo) => {
   };
 
   config.info = {
-    connectIp: "http://116.249.5.45:9732",
+    connectIp: "http://116.249.5.18:82",
   };
 
 
