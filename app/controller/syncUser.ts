@@ -23,7 +23,7 @@ class SyncUserController extends Controller {
             let fileMimeType = mimeType.lookup(filePath); // 获取文件的 memeType
 
             if (!fileMimeType.toString().includes('image')) {
-                console.log(`Failed! ${filePath}:\tNot image file!`);
+                ctx.logger.error(`Failed! ${filePath}:\tNot image file!`);
             }
             let data = fs.readFileSync(filePath);
             data = new Buffer(data).toString('base64');

@@ -1,6 +1,6 @@
 import { Service } from 'egg';
 import { IResult } from '../extend/helper';
-// const moment = require('moment');
+const moment = require('moment');
 const fs = require("fs");
 const path = require('path');
 
@@ -11,7 +11,7 @@ export default class UserService extends Service {
    * # 读照片文件返回base64
    */
   async readPhotofile(photoPath) {
-
+    const { ctx } = this;
     let base64 = '';
     // 保存照片
     await new Promise((resolve, reject) => {
@@ -19,7 +19,7 @@ export default class UserService extends Service {
       fs.readFile(photoPath, function (err, data) {
         if (err) {
           reject(err);
-          console.log(err);
+          ctx.logger.error(err);
         }
         else {
 
@@ -65,7 +65,7 @@ export default class UserService extends Service {
       // let photoPath = `c:/record_photo/${dev_id}/${sDate}/${photoName}.jpg`;
       let base64 = '';
 
-      console.log('photo path:' + photoPath);
+      // console.log('photo path:' + photoPath);
       base64 = await this.readPhotofile(photoPath);
       if ('' === base64) {
         jResult.code = "00000001";
@@ -305,6 +305,9 @@ export default class UserService extends Service {
 
       for (let i = 0; i < arrDev.length; i++) {
         let curDev = arrDev[i];
+        ctx.logger.info(
+          `${moment(new Date()).format("YYYY-MM-DD HH:mm:ss")} 设备 
+           ${curDev} 收到同步人员请求,人员数目 ${JSON.stringify(arrUser.length)}`);
         for (let j = 0; j < arrUser.length; j++) {
           // console.log('人员:' + JSON.stringify(arrUser[j]));
           let userId = arrUser[j].identity_number;
@@ -336,7 +339,7 @@ export default class UserService extends Service {
           let userName = arrUser[j].name;
           let userCard = arrUser[j].card_number;
           let userBirthday = arrUser[j].birth;
-          let str = `1,1,${id},${userNo},${userName},${userCard},0000000000,1,123456,${userBirthday},0,4`
+          let str = `1,1,${id},${userNo},${userName},${userCard},0000000000,1,123456,${userBirthday},0,4`;
 
           let jrealUpdate_1 = {
             jdev_id: curDev,
@@ -346,13 +349,14 @@ export default class UserService extends Service {
             jdata_str: str
           };
           await ctx.model.JrealUpdate_1.create(jrealUpdate_1);
+          ctx.logger.info(`${moment(new Date()).format("YYYY-MM-DD HH:mm:ss")}设备${curDev}同步人员成功:${userName}`);
         }
       }
 
       return jResult;
     } catch (err) {
       jResult.code = "00000001";
-      jResult.message = `${err.stack}`;
+      jResult.message = `${err.stack} `;
       jResult.result = null;
       return jResult;
     }
@@ -376,7 +380,7 @@ export default class UserService extends Service {
     let arrUserId = body.payload.params.pins;
 
 
-    console.log('删除设备人员:' + JSON.stringify(arrUserId));
+    ctx.logger.info(`删除设备${devId}的人员:共 ${arrUserId.length}人`);
 
     try {
 
@@ -398,11 +402,12 @@ export default class UserService extends Service {
         if ('00000001' !== res.code && res.result.length > 0) {
           id = res.result[0].id;
         } else {
-          return res;
+          ctx.logger.info(`未找到人员id,user_id: ${userId}`);
+          continue;
         }
         // 下发增量 
 
-        let str = `1,3,${id}`;
+        let str = `1, 3, ${id} `;
         let jrealUpdate1 = {
           jdev_id: devId,
           juser_id: id,
@@ -410,11 +415,13 @@ export default class UserService extends Service {
         };
         await ctx.model.JrealUpdate_1.create(jrealUpdate1);
       }
+      ctx.logger.info(`删除人员结果: ${JSON.stringify(jResult)}`);
       return jResult;
     } catch (err) {
       jResult.code = "00000001";
-      jResult.message = `${err.stack}`;
+      jResult.message = `${err.stack} `;
       jResult.result = null;
+      ctx.logger.error(`删除人员结果: ${JSON.stringify(jResult)}`);
       return jResult;
     }
   }

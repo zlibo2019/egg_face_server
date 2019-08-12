@@ -31,13 +31,13 @@ export default class ConsumerService extends Service {
                 let date = arrField[1];
                 jResult = await ctx.service.serviceUser.postRecord(dev_id, outInt, id, date, photoPath);
                 if (jResult.code !== '00000000') {
-                    console.log(jResult.message);
+                    ctx.logger.error(jResult.message);
                 } else {
-                    console.log(`${dev_id}记录上传成功!`);
+                    ctx.logger.info(`${dev_id}记录上传成功!`);
                 }
             }
         } catch (error) {
-            console.log(error);
+            ctx.logger.error(error);
         }
     }
 
@@ -56,7 +56,7 @@ export default class ConsumerService extends Service {
 
         try {
 
-            console.log('mq info:.....................' + JSON.stringify(payload));
+            // ctx.logger.info('mq info:.....................' + JSON.stringify(payload));
             // 记录
             if (undefined !== payload.inStr) {
 
@@ -88,7 +88,7 @@ export default class ConsumerService extends Service {
                 }
             }
         } catch (error) {
-            console.log(error);
+            ctx.logger.error(error);
         }
     }
 }
