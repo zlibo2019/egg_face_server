@@ -1,11 +1,9 @@
 'use strict';
 
-
 import { Controller } from 'egg';
 import { IResult } from '../extend/helper';
 const fs = require('fs');
 const path = require('path');
-
 const mimeType = require('mime-types');  // 文件类型
 
 /**
@@ -50,7 +48,7 @@ class SyncUserController extends Controller {
             // @ts-ignore
             user.picture = base64;
             // @ts-ignore
-            user.card_number = body.user_card; 
+            user.card_number = body.user_card;
             // @ts-ignore
             user.birth = body.user_birthday;
 

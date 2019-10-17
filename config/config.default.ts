@@ -27,7 +27,7 @@ export default (appInfo: EggAppInfo) => {
     host: '127.0.0.1',
     port: 3306,
     username: 'root',
-    password: '',
+    password: '123456',
     logging: true,
   };
 
@@ -101,7 +101,7 @@ export default (appInfo: EggAppInfo) => {
 
   config.cluster = {
     listen: {
-      port: 16006,
+      port: 15006,
       // hostname: '127.0.0.1',
     }
   }

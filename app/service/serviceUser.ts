@@ -20,9 +20,7 @@ export default class UserService extends Service {
         if (err) {
           reject(err);
           ctx.logger.error(err);
-        }
-        else {
-
+        } else {
           base64 = data.toString("base64");
           // console.log('success:' + base64);
           resolve();
@@ -45,6 +43,7 @@ export default class UserService extends Service {
       message: '',
       result: null
     };
+    let pin = '0';
     try {
       // console.log('sssssssssssss' + JSON.stringify(record));
       // let arrField = record.inStr.split(",");
@@ -53,7 +52,6 @@ export default class UserService extends Service {
       // let outInt = Number(arrField[3]) - 1;
       // let id = Number(arrField[0]);
       let res = await this.getUserIdById(id);
-      let pin = '0';
       if ('00000001' !== res.code) {
         pin = res.result[0].user_id;
       }
@@ -110,13 +108,16 @@ export default class UserService extends Service {
         jResult.code = '00000001';
         jResult.message = `提交记录错误：${res.message}`;
         jResult.result = null;
+        await ctx.service.serviceCommon.insertLog(4, `${pin}`, `${dev_id}`, `${outInt}`, `记录推送失败:${jResult.message}`);
         return jResult;
       }
+      await ctx.service.serviceCommon.insertLog(4, `${pin}`, `${dev_id}`, `${outInt}`, `记录推送成功`);
       return jResult;
     } catch (err) {
       jResult.code = '00000001';
       jResult.message = `${err.stack}`;
       jResult.result = null;
+      await ctx.service.serviceCommon.insertLog(4, `${pin}`, `${dev_id}`, `${outInt}`, `记录推送失败:${jResult.message}`);
       return jResult;
     }
   }
@@ -147,8 +148,11 @@ export default class UserService extends Service {
       let arrUser = await ctx.model.query(sql, {
         type: ctx.model.QueryTypes.SELECT,
       });
-
-      jResult.result = arrUser;
+      if (arrUser.length <= 0) {
+        jResult.code = "00000001";
+      } else {
+        jResult.result = arrUser;
+      }
       return jResult;
     } catch (err) {
       jResult.code = "00000001";
@@ -228,9 +232,11 @@ export default class UserService extends Service {
       // 更新人员
 
       // console.log('人员数目：' + arrUser.length.toString());
-
+      let users = '';
       for (let i = 0; i < arrUser.length; i++) {
-        let userId = arrUser[i].identity_number;
+
+        let userId = arrUser[i].pin;
+        users = `${users},${userId}`;
         let imgData = arrUser[i].picture;
         let root = path.resolve(__dirname, '..');
         root = path.resolve(root, '..');
@@ -277,7 +283,7 @@ export default class UserService extends Service {
           }
         }
         let dir = (Math.floor(id / 1000));
-        let photoPath = `${root}\\photo\\${dir}`;
+        let photoPath = `${root}\\app\\public\\photo\\${dir}`;
         let fileName = `${photoPath}\\${id}.jpg`;
 
 
@@ -303,14 +309,17 @@ export default class UserService extends Service {
 
       // 设置白名单、下发增量
 
+      users = users.substring(1);
       for (let i = 0; i < arrDev.length; i++) {
         let curDev = arrDev[i];
         ctx.logger.info(
           `${moment(new Date()).format("YYYY-MM-DD HH:mm:ss")} 设备 
-           ${curDev} 收到同步人员请求,人员数目 ${JSON.stringify(arrUser.length)}`);
+           ${curDev} 收到同步人员请求 ${users}`);
+        // @ts-ignore
+        await ctx.service.serviceCommon.insertLog(10, `${users}`, `${curDev}`, '', '收到同步请求');
         for (let j = 0; j < arrUser.length; j++) {
           // console.log('人员:' + JSON.stringify(arrUser[j]));
-          let userId = arrUser[j].identity_number;
+          let userId = arrUser[j].pin;
           // @ts-ignore
           let devUser = await ctx.model.DevUser.findOne({
             where: {
@@ -350,6 +359,8 @@ export default class UserService extends Service {
           };
           await ctx.model.JrealUpdate_1.create(jrealUpdate_1);
           ctx.logger.info(`${moment(new Date()).format("YYYY-MM-DD HH:mm:ss")}设备${curDev}同步人员成功:${userName}`);
+          // @ts-ignore
+          await ctx.service.serviceCommon.insertLog(1, `${userId}`, `${curDev}`, '', '同步成功');
         }
       }
 
@@ -378,15 +389,17 @@ export default class UserService extends Service {
 
     let devId = body.payload.params.sns;
     let arrUserId = body.payload.params.pins;
-
+    let userId;
 
     ctx.logger.info(`删除设备${devId}的人员:共 ${arrUserId.length}人`);
+    // @ts-ignore
+    await ctx.service.serviceCommon.insertLog(1, `${arrUserId}`, `${devId}`, '', '收到删除人员请求');
 
     try {
 
       // 下发增量
       for (let j = 0; j < arrUserId.length; j++) {
-        let userId = arrUserId[j];
+        userId = arrUserId[j];
         // 删除设备人员关系 
         // @ts-ignore
         await ctx.model.DevUser.destroy({
@@ -407,7 +420,7 @@ export default class UserService extends Service {
         }
         // 下发增量 
 
-        let str = `1, 3, ${id} `;
+        let str = `1,3,${id}`;
         let jrealUpdate1 = {
           jdev_id: devId,
           juser_id: id,
@@ -416,12 +429,15 @@ export default class UserService extends Service {
         await ctx.model.JrealUpdate_1.create(jrealUpdate1);
       }
       ctx.logger.info(`删除人员结果: ${JSON.stringify(jResult)}`);
+      // @ts-ignore
+      await ctx.service.serviceCommon.insertLog(3, `${userId}`, `${devId}`, '', `删除人员成功`);
       return jResult;
     } catch (err) {
       jResult.code = "00000001";
       jResult.message = `${err.stack} `;
       jResult.result = null;
       ctx.logger.error(`删除人员结果: ${JSON.stringify(jResult)}`);
+      await ctx.service.serviceCommon.insertLog(3, `${userId}`, `${devId}`, '', `删除人员失败:${err}`);
       return jResult;
     }
   }
