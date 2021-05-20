@@ -35,7 +35,7 @@
     "egg-xlsx": "^0.1.1",
     "ejsexcel": "^3.5.3",
     "exceljs": "^1.8.0",
-    "html-pdf": "^2.2.0",
+    "html-pdf": "^3.0.1",
     "html-to-image": "^0.1.0",
     "install": "^0.12.2",
     "jsdom": "^14.0.0",
