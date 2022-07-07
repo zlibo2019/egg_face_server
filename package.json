@@ -61,7 +61,7 @@
     "egg-emqtt": "^1.0.0",
     "egg-mock": "^3.16.0",
     "egg-ts-helper": "^1.11.0",
-    "moment": "^2.23.0",
+    "moment": "^2.29.4",
     "node-xlsx": "^0.12.1",
     "tslib": "^1.9.3",
     "tslint": "^4.0.0",
